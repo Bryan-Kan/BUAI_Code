@@ -18,28 +18,36 @@ stepreg$residuals
 rstandard(stepreg)
 cook<-cooks.distance(stepreg)
 cook
+plot(cook,ylab="Cooks Distance")
+points(3,cook[3],col='red')
+
 
 
 #Testing Homoscedasticity
-plot(causalreg$fitted.values, causalreg$residuals)
+par(mfrow=c(1,2))
+plot(stepreg$fitted.values, stepreg$residuals)
+zres<-rstandard(stepreg)
+plot(stepreg$fitted.values, zres)
+
 
 #Testing Linearity
-zres<-rstandard(causalreg)
-plot(causaldata$INT, zres)
+par(mfrow=c(1,3))
+plot(beltdata$TIME,zres)
+plot(beltdata$LENGTH, zres)
+plot(beltdata$WIDTH, zres)
 
 
 #Test for Normality
-hist(causalreg$residuals)
-qqnorm(causalreg$residuals)
+par(mfrow = c(1,2))
+hist(stepreg$residuals)
+qqnorm(stepreg$residuals)
+shapiro.test(stepreg$residuals)
 
-shapiro.test(causalreg$residuals)
 
 #Test of Independence
-data<-data.frame(QTR=c(1:40))
-newcausaldata<-cbind(causaldata,data)
+data<-data.frame(QTR=c(1:21))
+newbeltdata<-cbind(beltdata,data)
 #newdata
-plot(newcausaldata$QTR, causalreg$residuals, type="b")
+plot(newbeltdata$QTR, stepreg$residuals, type="b")
 
-install.packages("lmtest")
-library("lmtest")
-dwtest(causalreg, alternative = "two.sided")
+
