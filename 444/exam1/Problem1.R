@@ -51,3 +51,10 @@ newbeltdata<-cbind(beltdata,data)
 plot(newbeltdata$QTR, stepreg$residuals, type="b")
 
 
+data<-data.frame(LENGTH=c(250), WIDTH=c(15),SPLICE=c("Y"))
+pred.int<-predict(stepreg,data,level=0.95, interval="prediction")
+newbeltdata<-cbind(data,pred.int)
+newbeltdata
+
+
+
