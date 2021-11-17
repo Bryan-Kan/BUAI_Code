@@ -19,7 +19,7 @@ rstandard(stepreg)
 cook<-cooks.distance(stepreg)
 cook
 plot(cook,ylab="Cooks Distance")
-points(3,cook[3],col='red')
+points(17,cook[17],col='red')
 
 
 
@@ -49,6 +49,9 @@ data<-data.frame(QTR=c(1:21))
 newbeltdata<-cbind(beltdata,data)
 #newdata
 plot(newbeltdata$QTR, stepreg$residuals, type="b")
+
+library("lmtest")
+dwtest(stepreg, alternative = "two.sided")
 
 
 data<-data.frame(LENGTH=c(250), WIDTH=c(15),SPLICE=c("Y"))
