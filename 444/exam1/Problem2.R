@@ -15,26 +15,33 @@ hotelOccupancySeries=ts(hotel_Occupancy.Rooms, frequency=12, start = c(2007,1))
 hotelOccupancySeries
 plot.ts(hotelOccupancySeries)
 
-hw2forecasts<-ets(hw2series,model="AAA", lower = c(0.1,0.1,0.1, 0.8), upper = c(0.5,0.5,0.5, 0.9), damped=FALSE)
-hw2forecasts
-hw2forecasts$fitted
-plot(hw2forecasts)
-accuracy(hw2forecasts)
-residuals(hw2forecasts)
-summary(hw2forecasts)
-coef(hw2forecasts)
-forecast(hw2forecasts, level=0.95, h=12)
-predict(hw2forecasts,level=0.95, h=12)
-#RMSE 14.23307
+hotelOccupancyforecasts<-ets(hotelOccupancySeries,model="AAA", damped=FALSE)
+hotelOccupancyforecasts
+hotelOccupancyforecasts$fitted
+plot(hotelOccupancyforecasts)
+accuracy(hotelOccupancyforecasts)
+residuals(hotelOccupancyforecasts)
+summary(hotelOccupancyforecasts)
+coef(hotelOccupancyforecasts)
+forecast(hotelOccupancyforecasts, level=0.95, h=24)
 
-hw2forecasts<-ets(hw2series, model="MAM",lower = c(0.1,0.1,0.1, 0.8), upper = c(0.5,0.5,0.5, 0.9), damped = F)
-hw2forecasts
-hw2forecasts$fitted
-plot(hw2forecasts)
-accuracy(hw2forecasts)
-residuals(hw2forecasts)
-summary(hw2forecasts)
-coef(hw2forecasts)
-forecast(hw2forecasts, level=0.95, h=12)
-predict(hw2forecasts,level=0.95, h=12)
+
+hotelOccupancyforecasts<-ets(hotelOccupancySeries, model="MAM", damped = F)
+hotelOccupancyforecasts
+hotelOccupancyforecasts$fitted
+plot(hotelOccupancyforecasts)
+accuracy(hotelOccupancyforecasts)
+residuals(hotelOccupancyforecasts)
+summary(hotelOccupancyforecasts)
+coef(hotelOccupancyforecasts)
+forecast(hotelOccupancyforecasts, level=0.95, h=24)
+
+fit <- auto.arima(hotelOccupancySeries,max.p = 5,max.q = 5,max.P = 5,max.Q = 5,max.d = 3,seasonal = TRUE,ic = 'aicc')
+summary(fit)
+accuracy(fit)
+coef(fit)
+forecast(fit,h=24)
+plot(forecast(fit,h=24), include=1,24)
+str(fit)
+
 
