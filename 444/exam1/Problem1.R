@@ -47,7 +47,6 @@ shapiro.test(stepreg$residuals)
 #Test of Independence
 data<-data.frame(QTR=c(1:21))
 newbeltdata<-cbind(beltdata,data)
-#newdata
 plot(newbeltdata$QTR, stepreg$residuals, type="b")
 
 library("lmtest")
