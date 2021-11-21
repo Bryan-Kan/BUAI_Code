@@ -1,9 +1,13 @@
 #install.packages("readxl")
+#Plot of number of jobs accepted each day
 library("readxl")
-beltdata <- read_excel("/Users/bryankan/Downloads/belt.xlsx")
-beltdata
-nrow(beltdata)
-plot(beltdata)
+data <- read_excel("/Users/bryankan/Downloads/111111.xlsx")
+library(lattice)
+library(MASS)
+histogram(data$data)
+
+qqnorm(data$data, main ="11111")
+qqline(data$data)
 
 #Stepwise Regression
 null<-lm(TIME ~ 1,data=beltdata)

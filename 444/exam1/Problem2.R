@@ -15,6 +15,7 @@ hotelOccupancySeries=ts(hotel_Occupancy.Rooms, frequency=12, start = c(2007,1))
 hotelOccupancySeries
 plot.ts(hotelOccupancySeries)
 
+#additive trend-seasonal model
 hotelOccupancyforecasts<-ets(hotelOccupancySeries,model="AAA", damped=FALSE)
 hotelOccupancyforecasts
 hotelOccupancyforecasts$fitted
@@ -25,7 +26,7 @@ summary(hotelOccupancyforecasts)
 coef(hotelOccupancyforecasts)
 forecast(hotelOccupancyforecasts, level=0.95, h=24)
 
-
+#multiplicative trend-seasonal model
 hotelOccupancyforecasts<-ets(hotelOccupancySeries, model="MAM", damped = F)
 hotelOccupancyforecasts
 hotelOccupancyforecasts$fitted
@@ -36,6 +37,7 @@ summary(hotelOccupancyforecasts)
 coef(hotelOccupancyforecasts)
 forecast(hotelOccupancyforecasts, level=0.95, h=24)
 
+#ARIMA model
 fit <- auto.arima(hotelOccupancySeries,max.p = 5,max.q = 5,max.P = 5,max.Q = 5,max.d = 3,seasonal = TRUE,ic = 'aicc')
 summary(fit)
 accuracy(fit)
