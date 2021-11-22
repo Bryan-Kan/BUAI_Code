@@ -4,9 +4,9 @@ library("readxl")
 library(tidyverse)
 library(ggplot2)
 library(ggfortify)
-install.packages("psych")
+#install.packages("psych")
 library(psych)
-install.packages("graphics")
+#install.packages("graphics")
 library(graphics)
 
 # import data
@@ -31,10 +31,6 @@ universitiesData$`% new stud. from top 25%`[is.na(universitiesData$`% new stud. 
 universitiesData$`# FT undergrad`[is.na(universitiesData$`# FT undergrad`)]<-median(universitiesData$`# FT undergrad`,na.rm=TRUE)
 universitiesData$`# PT undergrad`[is.na(universitiesData$`# PT undergrad`)]<-median(universitiesData$`# PT undergrad`,na.rm=TRUE)
 universitiesData$`% fac. w/PHD`[is.na(universitiesData$`% fac. w/PHD`)]<-median(universitiesData$`% fac. w/PHD`,na.rm=TRUE)
-
-universitiesData$`% new stud. from top 10%` <- universitiesData$`% new stud. from top 10%` / 100
-universitiesData$`% new stud. from top 25%` <- universitiesData$`% new stud. from top 25%` / 100
-universitiesData$`% fac. w/PHD` <- universitiesData$`% fac. w/PHD` / 100
 
 
 length(universitiesData)
@@ -79,10 +75,12 @@ universitiesDataPcs.sdr <- prcomp(na.omit(universitiesData[,-c(1:3)]), scale. = 
 summary(universitiesDataPcs.sdr)
 universitiesDataPcs.sdr$rot
 universitiesDataPcs.sdr$rot [,1:5]
+universitiesDataPcs.sdr$rot [,1:2]
 scores <- universitiesDataPcs.sdr$x
 
 dim(universitiesDataPcs.sdr$x)
 
+head(universitiesDataPcs.sdr)
 
 
 
@@ -114,6 +112,6 @@ plot(cumsum(pve),
 
 
 # Save the new dataset
-write.csv(scores, file = "scores.csv")
+write.csv(scores, file = "/Users/bryankan/Downloads/scores.csv")
 
 
